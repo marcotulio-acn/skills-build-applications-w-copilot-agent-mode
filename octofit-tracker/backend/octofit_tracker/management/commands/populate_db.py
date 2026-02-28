@@ -19,6 +19,7 @@ class Command(BaseCommand):
             dc = Team.objects.create(name='dc', description='DC Team')
 
             self.stdout.write(self.style.SUCCESS('Creating users...'))
+
             users = [
                 User.objects.create(email='tony@stark.com', name='Tony Stark', team=marvel.name),
                 User.objects.create(email='steve@rogers.com', name='Steve Rogers', team=marvel.name),
@@ -27,14 +28,14 @@ class Command(BaseCommand):
             ]
 
             self.stdout.write(self.style.SUCCESS('Creating activities...'))
-            Activity.objects.create(user=users[0], type='run', duration=30, date='2024-01-01')
-            Activity.objects.create(user=users[1], type='cycle', duration=45, date='2024-01-02')
-            Activity.objects.create(user=users[2], type='swim', duration=25, date='2024-01-03')
-            Activity.objects.create(user=users[3], type='yoga', duration=60, date='2024-01-04')
+            Activity.objects.create(user_email='tony@stark.com', type='run', duration=30, date='2024-01-01')
+            Activity.objects.create(user_email='steve@rogers.com', type='cycle', duration=45, date='2024-01-02')
+            Activity.objects.create(user_email='bruce@wayne.com', type='swim', duration=25, date='2024-01-03')
+            Activity.objects.create(user_email='clark@kent.com', type='yoga', duration=60, date='2024-01-04')
 
             self.stdout.write(self.style.SUCCESS('Creating leaderboard...'))
-            Leaderboard.objects.create(team=marvel, points=150)
-            Leaderboard.objects.create(team=dc, points=120)
+            Leaderboard.objects.create(team_name=marvel.name, points=150)
+            Leaderboard.objects.create(team_name=dc.name, points=120)
 
             self.stdout.write(self.style.SUCCESS('Creating workouts...'))
             Workout.objects.create(name='Pushups', description='Do 20 pushups', difficulty='easy')
